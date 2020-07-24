@@ -13,15 +13,9 @@ import '../../../../fixtures/fixture_feature.dart';
 class MockSharedPreferences extends Mock implements SharedPreferences {}
 
 void main() {
-  NumberTriviaLocalDataSourceImpl dataSource;
-  MockSharedPreferences mockSharedPreferences;
-
-  setUp(() {
-    mockSharedPreferences = MockSharedPreferences();
-    dataSource = NumberTriviaLocalDataSourceImpl(
-      sharedPreferences: mockSharedPreferences,
-    );
-  });
+  final mockSharedPreferences = MockSharedPreferences();
+  final dataSource =
+      NumberTriviaLocalDataSourceImpl(sharedPreferences: mockSharedPreferences);
 
   group('getLastNumberTrivia', () {
     final tNumberTriviaModel =

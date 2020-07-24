@@ -14,8 +14,8 @@ import '../../../../fixtures/fixture_feature.dart';
 class MockHttpClient extends Mock implements http.Client {}
 
 void main() {
-  NumberTriviaRemoteDataSourceImpl dataSource;
-  MockHttpClient mockHttpClient;
+  final mockHttpClient = MockHttpClient();
+  final dataSource = NumberTriviaRemoteDataSourceImpl(client: mockHttpClient);
   void setUpMockHttpClientSuccess200() {
     when(mockHttpClient.get(any, headers: anyNamed('headers')))
         .thenAnswer((_) async => http.Response(fixture('trivia.json'), 200));
@@ -25,11 +25,6 @@ void main() {
     when(mockHttpClient.get(any, headers: anyNamed('headers')))
         .thenAnswer((_) async => http.Response('Something went wrong', 404));
   }
-
-  setUp(() {
-    mockHttpClient = MockHttpClient();
-    dataSource = NumberTriviaRemoteDataSourceImpl(client: mockHttpClient);
-  });
 
   group('getConcreteNumberTrivia', () {
     final tNumber = 1;

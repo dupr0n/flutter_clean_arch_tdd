@@ -3,10 +3,8 @@ import 'package:flutter_clean_arch_tdd/core/util/input_converter.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  InputConverter inputConverter;
-  setUp(() {
-    inputConverter = InputConverter();
-  });
+  InputConverter inputConverter = InputConverter();
+
   group('stringToUnsignedInt', () {
     test(
       'Should return an integer when the string represents an unsigned integer',

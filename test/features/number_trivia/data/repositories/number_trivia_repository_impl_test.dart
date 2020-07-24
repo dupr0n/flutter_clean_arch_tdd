@@ -23,6 +23,7 @@ void main() {
   MockLocalDataSource mockLocalDataSource;
   MockNetworkInfo mockNetworkInfo;
 
+  //! Required if you're using 'verifyZeroInteractions' for a function and previous tests 'interact' with that function
   setUp(() {
     mockRemoteDataSource = MockRemoteDataSource();
     mockLocalDataSource = MockLocalDataSource();
