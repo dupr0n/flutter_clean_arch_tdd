@@ -41,7 +41,15 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
       //Returns stream, so this must also yield
       yield* inputEither.fold((failure) async* {
         yield Error(message: INVALID_INPUT_FAILURE_MESSAGE);
-      }, (integer) => null);
+      }, (integr) async* {
+        yield Loading();
+        final failureOrTrivia =
+            await getConcreteNumberTrivia(Params(number: integr));
+        yield failureOrTrivia.fold(
+          (failure) => Error(message: SERVER_FAILURE_MESSAGE),
+          (trivia) => Loaded(trivia: trivia),
+        );
+      });
     }
   }
 }
