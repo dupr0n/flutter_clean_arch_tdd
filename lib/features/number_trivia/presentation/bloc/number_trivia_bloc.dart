@@ -35,6 +35,7 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
   Stream<NumberTriviaState> mapEventToState(
     NumberTriviaEvent event,
   ) async* {
+    yield Loading();
     if (event is GetNumberTriviaForConcreteNumber) {
       final inputEither =
           inputConverter.stringToUnsignedInt(event.numberString);
@@ -42,13 +43,11 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
       yield* inputEither.fold((failure) async* {
         yield Error(message: INVALID_INPUT_FAILURE_MESSAGE);
       }, (integr) async* {
-        yield Loading();
         final failureOrTrivia =
             await getConcreteNumberTrivia(Params(number: integr));
         yield* _eitherLoadedOrErrorState(failureOrTrivia);
       });
     } else if (event is GetNumberTriviaForRandomNumber) {
-      yield Loading();
       final failureOrTrivia = await getRandomNumberTrivia(NoParams());
       yield* _eitherLoadedOrErrorState(failureOrTrivia);
     }

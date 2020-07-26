@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_clean_arch_tdd/features/number_trivia/presentation/bloc/number_trivia_bloc.dart';
+
+import '../bloc/number_trivia_bloc.dart';
 
 class TriviaControls extends StatefulWidget {
   const TriviaControls({
@@ -43,7 +44,7 @@ class _TriviaControlsState extends State<TriviaControls> {
             Expanded(
               child: RaisedButton(
                 child: Text('Get random trivia'),
-                onPressed: () {},
+                onPressed: dispatchRandom,
               ),
             ),
           ],
